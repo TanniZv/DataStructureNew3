@@ -1,0 +1,12 @@
+/Users/tanya/Projects/DataStructureNew/DataStructureNew/bin/Debug/netcoreapp3.1/DataStructureNew.deps.json
+/Users/tanya/Projects/DataStructureNew/DataStructureNew/bin/Debug/netcoreapp3.1/DataStructureNew.runtimeconfig.json
+/Users/tanya/Projects/DataStructureNew/DataStructureNew/bin/Debug/netcoreapp3.1/DataStructureNew.runtimeconfig.dev.json
+/Users/tanya/Projects/DataStructureNew/DataStructureNew/bin/Debug/netcoreapp3.1/DataStructureNew.dll
+/Users/tanya/Projects/DataStructureNew/DataStructureNew/bin/Debug/netcoreapp3.1/DataStructureNew.pdb
+/Users/tanya/Projects/DataStructureNew/DataStructureNew/bin/Debug/netcoreapp3.1/nunit.framework.dll
+/Users/tanya/Projects/DataStructureNew/DataStructureNew/obj/Debug/netcoreapp3.1/DataStructureNew.csprojAssemblyReference.cache
+/Users/tanya/Projects/DataStructureNew/DataStructureNew/obj/Debug/netcoreapp3.1/DataStructureNew.AssemblyInfoInputs.cache
+/Users/tanya/Projects/DataStructureNew/DataStructureNew/obj/Debug/netcoreapp3.1/DataStructureNew.AssemblyInfo.cs
+/Users/tanya/Projects/DataStructureNew/DataStructureNew/obj/Debug/netcoreapp3.1/DataStructureNew.csproj.CopyComplete
+/Users/tanya/Projects/DataStructureNew/DataStructureNew/obj/Debug/netcoreapp3.1/DataStructureNew.dll
+/Users/tanya/Projects/DataStructureNew/DataStructureNew/obj/Debug/netcoreapp3.1/DataStructureNew.pdb

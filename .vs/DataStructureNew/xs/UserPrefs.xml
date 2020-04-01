@@ -1,0 +1,32 @@
+﻿<Properties StartupConfiguration="{7A63C3DA-D9ED-4C6C-871F-A42689318482}|Default">
+  <MonoDevelop.Ide.ItemProperties.DataStructureNew PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Tests/UnitTest1.cs">
+    <Files>
+      <File FileName="DataStructureNew/Program.cs" Line="17" Column="6" />
+      <File FileName="DataStructureNew/EmptyInterface.cs" />
+      <File FileName="Tests/UnitTest1.cs" Line="20" Column="1" />
+      <File FileName="DataStructureNew/ArrayList.cs" />
+      <File FileName="DataStructureNew/LinkedList.cs" />
+      <File FileName="DataStructureNew/Node.cs" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="DataStructureNew" expanded="True">
+            <Node name="DataStructureNew" expanded="True" />
+            <Node name="Tests" expanded="True">
+              <Node name="Dependencies" expanded="True" />
+              <Node name="UnitTest1.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
