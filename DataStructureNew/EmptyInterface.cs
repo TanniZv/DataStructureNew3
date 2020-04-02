@@ -16,9 +16,9 @@ namespace DataStructureNew
             public int IndexByValue(int a);
             public void ChangeByIndex(int index, int a);
             public void Reverse();
-            public int MaxElement(int[] a);
-            public int MinElement(int[] a);
-            public int MinIndex(int[] a);
+            public int MaxElement();
+            public int MinElement();
+            public int MinIndex();
             public int MaxIndex(int[] a);
             public void SorRise(int[] a);
             public void SortFall(int[] a);

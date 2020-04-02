@@ -3,11 +3,11 @@ using DataStructureNew;
 
 namespace Tests
 {
-   
-        public class ListTest
-        {
-            IList actual;
-            int q;
+
+    public class ListTest
+    {
+        IList actual;
+        int q;
 
         [SetUp]
         public void ListSelect()
@@ -18,13 +18,13 @@ namespace Tests
                     actual = new ArrayList();
                     break;
 
-                case 2:
-                    actual = new LinkedList();
-                    break;
+                //case 2:
+                //    actual = new LinkedList();
+                //    break;
             }
         }
 
-            [TestCase(new int[] { 1, 2, 3 }, 4, ExpectedResult = new int[] { 4, 1, 2, 3 })]
+        [TestCase(new int[] { 1, 2, 3 }, 4, ExpectedResult = new int[] { 4, 1, 2, 3 })]
             [TestCase(new int[] { }, 1, ExpectedResult = new int[] { 1 })]
             public int[] AddAtTheBegginingTest(int[] array, int a)
             {
@@ -123,11 +123,11 @@ namespace Tests
 
             [TestCase(new int[] { 1, 2, 3, 54, 73, 23 }, ExpectedResult = 73)]
             [TestCase(new int[] { 7 }, ExpectedResult = 7)]
-            public int MaxElementTest(int[] array)
+            public int MaxElementTest(int []array)
             {
                 ArrayList actual = new ArrayList(array);
-                actual.MaxElement(array);
-                return actual.MaxElement(array);
+                actual.MaxElement();
+                return actual.MaxElement();
             }
 
             [TestCase(new int[] { 1, 2, 3, 54, 73, 23 }, ExpectedResult = 1)]
@@ -136,8 +136,8 @@ namespace Tests
             public int MinElementTest(int[] array)
             {
                 ArrayList actual = new ArrayList(array);
-                actual.MinElement(array);
-                return actual.MinElement(array);
+                actual.MinElement();
+                return actual.MinElement();
             }
 
             [TestCase(new int[] { 1, 2, 3, 54, 73, 23 }, ExpectedResult = 4)]
@@ -154,8 +154,8 @@ namespace Tests
             public int MinIndexTest(int[] array)
             {
                 ArrayList actual = new ArrayList(array);
-                actual.MinIndex(array);
-                return actual.MinIndex(array);
+                actual.MinIndex();
+                return actual.MinIndex();
             }
 
             [TestCase(new int[] { 1, 2, 3 }, ExpectedResult = new int[] { 1, 2, 3 })]

@@ -224,8 +224,10 @@ namespace DataStructureNew
 
             //12 значение макс эл
 
-            public int MaxElement(int[] a)
+            public int MaxElement()
             {
+                 int[] a = array;
+
                 int max = a[0];
 
                 for (int i = 0; i < a.Length; i++)
@@ -240,9 +242,10 @@ namespace DataStructureNew
 
 
             // 13 значение мин
-            public int MinElement(int[] a)
+            public int MinElement()
             {
-                int min = a[0];
+            int[] a = array;
+            int min = a[0];
 
                 for (int i = 0; i < a.Length; i++)
                 {
@@ -255,16 +258,17 @@ namespace DataStructureNew
             }
 
             // 15 поиск макс индекс
-            public int MinIndex(int[] a)
+            public int MinIndex()
             {
-                int min = a[0];
+                int[] newArray = array;
+                int min = newArray[0];
                 int minIndex = 0;
 
-                for (int i = 0; i < a.Length; i++)
+                for (int i = 0; i <newArray.Length; i++)
                 {
-                    if (a[i] < min)
+                    if (newArray [i] < min)
                     {
-                        min = a[i];
+                        min = newArray [i];
                         minIndex = i;
                     }
                 }

@@ -1,7 +1,7 @@
 ﻿using System;
 namespace DataStructureNew
 {
-    public class LinkedList: IList 
+    public class LinkedList//: IList 
     {
         
             private Node root;
@@ -89,16 +89,16 @@ namespace DataStructureNew
         }
 
         //4
-        public void DelTheLastEl()
+        public void DelTheLastEl() //не работает
         {
             Node tmp = root;
 
-           while (tmp.Next!=null)
+           while (tmp.Next.Next!=null)
             {
                 tmp = tmp.Next;
             }
 
-            tmp = null;
+            tmp.Next  = null;
             Lenght--;
         }
 
@@ -114,17 +114,14 @@ namespace DataStructureNew
         public void delByIndex(int delIndex) //удаление по индексу
         {
             Node tmp = root;
-            Node q;
 
-            for (int i=1; i<=delIndex; i++)
+            for (int i=1; i<delIndex-2; i++)
             {
                 tmp = tmp.Next;
             }
 
-            for (int i= delIndex; i<=Lenght;i++ )
-            {
+            tmp.Next  = tmp.Next.Next ;
 
-            }
             Lenght--;
         }
 
@@ -135,9 +132,112 @@ namespace DataStructureNew
         //}
 
 
+        //8 индекс по значению
+        public int IndexByValue(int a)
+        {
+            Node tmp = root;
+            int Index=-1; //если нет элемента равного а вернет 0
 
+            for (int i = 1; i < Lenght ; i++)
+            {
+                if (tmp.Value ==a)
+                {
+                    Index = i;
+                }
 
+                tmp = tmp.Next;
+            }
+            return Index;
 
         }
+
+        //9 изменение по индексу
+        public void ChangeByIndex(int index, int a)
+        {
+            Node tmp = root;
+            int i = 1;
+
+            while ( i!= index)
+            {
+                tmp = tmp.Next;
+                i++;
+            }
+
+            tmp.Next.Value = a;
+        }
+
+        //11 реверс
+        public void Reverse()
+        {
+            Node tmpRoot = root;
+            Node tmp;
+
+            for (int i=1; i<=Lenght; i++)
+            {
+                tmpRoot.Next = root;
+                tmp = root; 
+            }
+
+        }
+
+        //12 значение макс эл
+        public int MaxElement()
+        {
+            Node tmp = root;
+            int max=tmp.Value;
+
+            for (int i=1; i<=Lenght; i++)
+            {
+                if (max < tmp.Value)
+                {
+                    max = tmp.Value;
+                }
+                tmp = tmp.Next;
+            }
+
+            return max;
+        }
+
+        // 13 значение мин
+        public int MinElement()
+        {
+            Node tmp = root;
+            int min = tmp.Value;
+
+            for (int i = 1; i <= Lenght; i++)
+            {
+                if (min > tmp.Value)
+                {
+                    min = tmp.Value;
+                }
+                tmp = tmp.Next;
+            }
+
+            return min;
+        }
+
+        // 15 поиск макс индекс
+        public int MaxIndex()
+        {
+            Node tmp = root;
+            int max = tmp.Value;
+            int Index=1;
+
+            for (int i = 1; i <= Lenght; i++)
+            {
+                if (max < tmp.Value)
+                {
+                    max = tmp.Value;
+                    Index = i;
+                }
+                tmp = tmp.Next;
+            }
+
+            return Index ;
+        }
+
+
+
+    }
 }
 
