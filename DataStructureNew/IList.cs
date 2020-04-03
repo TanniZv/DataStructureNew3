@@ -4,7 +4,7 @@ namespace DataStructureNew
     
         public interface IList
         {
-
+        //public void AddMass(int[] array);
             int[] ReturnArray();
             public void AddAtTheEnd(int a);
             public void AddAtTheBeggining(int a);
@@ -19,11 +19,11 @@ namespace DataStructureNew
             public int MaxElement();
             public int MinElement();
             public int MinIndex();
-            public int MaxIndex(int[] a);
-            public void SorRise(int[] a);
+            public int MaxIndex();
+            public void SortRise();
             public void SortFall(int[] a);
             public void delByValue(int a);
-            public int ReturnLenrth(int[] a);
+            public int ReturnLenrth();
             public void AddArrayAtTheEnd(int[] a);
             public void AddArrayAtTheBeggining(int[] a);
             public void AddArrayByIndex(int[] a, int index);

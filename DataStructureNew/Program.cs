@@ -29,9 +29,15 @@ namespace DataStructureNew
             //L.DelTheLastEl();
             //L.delTheFirstEl();
             //Console.Write(L.IndexByValue(56
-            L.Reverse();
+            //L.Reverse();
+            //L.delByIndex(2);
+            //L.delByValue(56);
+
+            //int[] b = new int[] { 1, 2, 3, 4, 73, 23 };
+            //int[] c = new int[] { 100 };
+            //L.AddArrayAtTheBeggining(c);
             qqq(L.ReturnArray());
-            Console.Write(L.MaxIndex());
+            Console.Write(L.ValueByIndex(2));
         }
 
         static void qqq(int[] a)

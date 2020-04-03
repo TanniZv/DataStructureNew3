@@ -1,13 +1,21 @@
 using NUnit.Framework;
 using DataStructureNew;
 
+
 namespace Tests
 {
+    [TestFixture (1)]
+    [TestFixture (2)]
 
     public class ListTest
     {
         IList actual;
         int q;
+
+        public ListTest (int _q)
+        {
+            q = _q;
+        }
 
         [SetUp]
         public void ListSelect()
@@ -18,51 +26,54 @@ namespace Tests
                     actual = new ArrayList();
                     break;
 
-                //case 2:
-                //    actual = new LinkedList();
-                //    break;
+                case 2:
+                    actual = new LinkedList();
+                    break;
             }
         }
 
-        [TestCase(new int[] { 1, 2, 3 }, 4, ExpectedResult = new int[] { 4, 1, 2, 3 })]
+            [TestCase(new int[] { 1, 2, 3 }, 4, ExpectedResult = new int[] { 4, 1, 2, 3 })]
             [TestCase(new int[] { }, 1, ExpectedResult = new int[] { 1 })]
             public int[] AddAtTheBegginingTest(int[] array, int a)
             {
-                ArrayList actual = new ArrayList(array);
-                actual.AddAtTheBeggining(a);
+            actual.AddArrayAtTheEnd(array);
+            actual.AddAtTheBeggining(a);
                 return actual.ReturnArray();
             }
 
             [TestCase(new int[] { 1, 2, 3 }, 7, ExpectedResult = new int[] { 1, 2, 3, 7 })]
             public int[] AddAtTheEndTest(int[] array, int a)
             {
-                ArrayList actual = new ArrayList(array);
+                actual.AddArrayAtTheEnd(array);
                 actual.AddAtTheEnd(a);
                 return actual.ReturnArray();
             }
 
             [TestCase(new int[] { 1, 2, 3 }, new int[] { 4, 5 }, ExpectedResult = new int[] { 1, 2, 3, 4, 5 })]
-            public int[] AddArrayAtTheEndTest(int[] array, int[] a)
+        [TestCase(new int[] {  }, new int[] { 4, 5 }, ExpectedResult = new int[] {  4, 5 })]
+        [TestCase(new int[] { 1,  }, new int[] { 4, 5 }, ExpectedResult = new int[] { 1, 4, 5 })]
+        public int[] AddArrayAtTheEndTest(int[] array, int[] a)
             {
-                ArrayList actual = new ArrayList(array);
-                actual.AddArrayAtTheEnd(a);
+            actual.AddArrayAtTheEnd(array);
+            actual.AddArrayAtTheEnd(a);
                 return actual.ReturnArray();
             }
 
             [TestCase(new int[] { 1, 2, 3 }, 0, 9, ExpectedResult = new int[] { 9, 1, 2, 3 })]
             [TestCase(new int[] { 1, 2, 3, 4, 5 }, 3, 9, ExpectedResult = new int[] { 1, 2, 3, 9, 4, 5 })]
+            [TestCase(new int[] { 1, 2, 3, 4, 5 }, 5, 9, ExpectedResult = new int[] { 1, 2, 3, 4, 5,9 })]
             public int[] AddAccordingToIndexTest(int[] array, int index, int a)
             {
-                ArrayList actual = new ArrayList(array);
-                actual.AddAccordingToIndex(index, a);
+            actual.AddArrayAtTheEnd(array);
+            actual.AddAccordingToIndex(index, a);
                 return actual.ReturnArray();
             }
 
             [TestCase(new int[] { 1, 2, 3 }, ExpectedResult = new int[] { 1, 2 })]
             public int[] DelTheLastElTest(int[] array)
-            {
-                ArrayList actual = new ArrayList(array);
-                actual.DelTheLastEl();
+        {
+            actual.AddArrayAtTheEnd(array);
+            actual.DelTheLastEl();
                 return actual.ReturnArray();
             }
 
@@ -70,17 +81,18 @@ namespace Tests
             [TestCase(new int[] { 1 }, ExpectedResult = new int[] { })]
             public int[] delTheFirstElTest(int[] array)
             {
-                ArrayList actual = new ArrayList(array);
-                actual.delTheFirstEl();
+            actual.AddArrayAtTheEnd(array);
+            actual.delTheFirstEl();
                 return actual.ReturnArray();
             }
 
             [TestCase(new int[] { 1, 2, 3 }, 0, ExpectedResult = new int[] { 2, 3 })]
             [TestCase(new int[] { 1, 2, 3, 54, 73, 23 }, 4, ExpectedResult = new int[] { 1, 2, 3, 54, 23 })]
-            public int[] delByIndexTest(int[] array, int index)
+            [TestCase(new int[] { 1, 2, 3, 54 }, 3, ExpectedResult = new int[] { 1, 2, 3 })]
+        public int[] delByIndexTest(int[] array, int index)
             {
-                ArrayList actual = new ArrayList(array);
-                actual.delByIndex(index);
+            actual.AddArrayAtTheEnd(array);
+            actual.delByIndex(index);
                 return actual.ReturnArray();
             }
 
@@ -88,8 +100,8 @@ namespace Tests
             [TestCase(new int[] { 1, 2, 3, 74, 73, 23 }, 5, ExpectedResult = 23)]
             public int ValueByIndexTest(int[] array, int index)
             {
-                ArrayList actual = new ArrayList(array);
-                actual.ValueByIndex(index);
+            actual.AddArrayAtTheEnd(array);
+            actual.ValueByIndex(index);
                 return actual.ValueByIndex(index);
             }
 
@@ -97,27 +109,27 @@ namespace Tests
             [TestCase(new int[] { 1, 2, 3, 74, 73, 23 }, 4, ExpectedResult = -1)]
             public int IndexByValuexTest(int[] array, int a)
             {
-                ArrayList actual = new ArrayList(array);
-                actual.IndexByValue(a);
+            actual.AddArrayAtTheEnd(array);
+            actual.IndexByValue(a);
                 return actual.IndexByValue(a);
             }
 
 
-            [TestCase(new int[] { 1, 2, 3 }, 0, 9, ExpectedResult = new int[] { 9, 2, 3 })]
-            public int[] ChangeByIndexTest(int[] array, int index, int a)
-            {
-                ArrayList actual = new ArrayList(array);
-                actual[index] = a;
-                return actual.ReturnArray();
-            }
+            //[TestCase(new int[] { 1, 2, 3 }, 0, 9, ExpectedResult = new int[] { 9, 2, 3 })]
+            //public int[] ChangeByIndexTest(int[] array, int index, int a)
+            //{
+            //actual.AddArrayAtTheEnd(array);
+            //actual[index] = a;
+            //    return actual.ReturnArray();
+            //}
 
             [TestCase(new int[] { 1, 2, 3 }, ExpectedResult = new int[] { 3, 2, 1 })]
             [TestCase(new int[] { 7, 6, 5, 4, 3 }, ExpectedResult = new int[] { 3, 4, 5, 6, 7 })]
             [TestCase(new int[] { 7 }, ExpectedResult = new int[] { 7 })]
             public int[] ReverseTest(int[] array)
             {
-                ArrayList actual = new ArrayList(array);
-                actual.Reverse();
+            actual.AddArrayAtTheEnd(array);
+            actual.Reverse();
                 return actual.ReturnArray();
             }
 
@@ -125,8 +137,8 @@ namespace Tests
             [TestCase(new int[] { 7 }, ExpectedResult = 7)]
             public int MaxElementTest(int []array)
             {
-                ArrayList actual = new ArrayList(array);
-                actual.MaxElement();
+            actual.AddArrayAtTheEnd(array);
+            actual.MaxElement();
                 return actual.MaxElement();
             }
 
@@ -135,8 +147,8 @@ namespace Tests
             [TestCase(new int[] { 7 }, ExpectedResult = 7)]
             public int MinElementTest(int[] array)
             {
-                ArrayList actual = new ArrayList(array);
-                actual.MinElement();
+            actual.AddArrayAtTheEnd(array);
+            actual.MinElement();
                 return actual.MinElement();
             }
 
@@ -144,27 +156,27 @@ namespace Tests
             [TestCase(new int[] { 7 }, ExpectedResult = 0)]
             public int MaxIndexTest(int[] array)
             {
-                ArrayList actual = new ArrayList(array);
-                actual.MaxIndex(array);
-                return actual.MaxIndex(array);
+            actual.AddArrayAtTheEnd(array);
+            actual.MaxIndex();
+                return actual.MaxIndex();
             }
 
             [TestCase(new int[] { 1, 2, 3, 54, 73, 23 }, ExpectedResult = 0)]
             [TestCase(new int[] { 7 }, ExpectedResult = 0)]
             public int MinIndexTest(int[] array)
             {
-                ArrayList actual = new ArrayList(array);
-                actual.MinIndex();
+            actual.AddArrayAtTheEnd(array);
+            actual.MinIndex();
                 return actual.MinIndex();
             }
 
             [TestCase(new int[] { 1, 2, 3 }, ExpectedResult = new int[] { 1, 2, 3 })]
             [TestCase(new int[] { 7, 6, 5, 4, 3 }, ExpectedResult = new int[] { 3, 4, 5, 6, 7 })]
             [TestCase(new int[] { 7 }, ExpectedResult = new int[] { 7 })]
-            public int[] SorRiseTest(int[] array)
+            public int[] SortRiseTest(int[] array)
             {
-                ArrayList actual = new ArrayList(array);
-                actual.SorRise(array);
+            actual.AddArrayAtTheEnd(array);
+            actual.SortRise();
                 return actual.ReturnArray();
             }
 
@@ -173,18 +185,19 @@ namespace Tests
             [TestCase(new int[] { 7 }, ExpectedResult = new int[] { 7 })]
             public int[] SortFall(int[] array)
             {
-                ArrayList actual = new ArrayList(array);
-                actual.SortFall(array);
+            actual.AddArrayAtTheEnd(array);
+            actual.SortFall(array);
                 return actual.ReturnArray();
             }
 
             [TestCase(new int[] { 1, 2, 3 }, 2, ExpectedResult = new int[] { 1, 3 })]
+            [TestCase(new int[] { 1,1,1, 2, 3 }, 1, ExpectedResult = new int[] { 2, 3 })]
             [TestCase(new int[] { 1, 3, 6, 2, 8 }, 8, ExpectedResult = new int[] { 1, 3, 6, 2 })]
-            [TestCase(new int[] { 1, 2, 3, 6, 2, 8, 76, 95, 90, 2 }, 2, ExpectedResult = new int[] { 1, 3, 6, 8, 76, 95, 90 })]
+            [TestCase(new int[] { 1, 2,2, 3, 6, 2, 8, 76, 95, 90, 2 }, 2, ExpectedResult = new int[] { 1, 3, 6, 8, 76, 95, 90 })]
             public int[] delByValueTest(int[] array, int a)
             {
-                ArrayList actual = new ArrayList(array);
-                actual.delByValue(a);
+            actual.AddArrayAtTheEnd(array);
+            actual.delByValue(a);
                 return actual.ReturnArray();
             }
 
@@ -192,9 +205,9 @@ namespace Tests
             [TestCase(new int[] { 7 }, ExpectedResult = 1)]
             public int ReturnLenrthTest(int[] array)
             {
-                ArrayList actual = new ArrayList(array);
-                actual.ReturnLenrth(array);
-                return actual.ReturnLenrth(array);
+            actual.AddArrayAtTheEnd(array);
+            actual.ReturnLenrth();
+                return actual.ReturnLenrth();
             }
 
             [TestCase(new int[] { 1, 2, 3 }, new int[] { 4, 5 }, ExpectedResult = new int[] { 4, 5, 1, 2, 3 })]
@@ -202,8 +215,8 @@ namespace Tests
             [TestCase(new int[] { }, new int[] { 4, 5 }, ExpectedResult = new int[] { 4, 5 })]
             public int[] AddArrayAtTheBegginingTest(int[] array, int[] a)
             {
-                ArrayList actual = new ArrayList(array);
-                actual.AddArrayAtTheBeggining(a);
+            actual.AddArrayAtTheEnd(array);
+            actual.AddArrayAtTheBeggining(a);
                 return actual.ReturnArray();
             }
 
@@ -212,8 +225,8 @@ namespace Tests
             [TestCase(new int[] { 23, 24, 25, 26, 27, 28, 29, 30 }, 5, new int[] { 4, 5 }, ExpectedResult = new int[] { 23, 24, 25, 26, 27, 4, 5, 28, 29, 30 })]
             public int[] AddArrayByIndexTest(int[] array, int index, int[] a)
             {
-                ArrayList actual = new ArrayList(array);
-                actual.AddArrayByIndex(a, index);
+            actual.AddArrayAtTheEnd(array);
+            actual.AddArrayByIndex(a, index);
                 return actual.ReturnArray();
             }
 
@@ -221,8 +234,8 @@ namespace Tests
             [TestCase(new int[] { 23, 24, 25, 26, 27, 28, 29, 30 }, 5, ExpectedResult = new int[] { 23, 24, 25 })]
             public int[] DelSeveralLastElTest(int[] array, int a)
             {
-                ArrayList actual = new ArrayList(array);
-                actual.DelSeveralLastEl(a);
+            actual.AddArrayAtTheEnd(array);
+            actual.DelSeveralLastEl(a);
                 return actual.ReturnArray();
             }
 
@@ -230,8 +243,8 @@ namespace Tests
             [TestCase(new int[] { 23, 24, 25, 26, 27, 28, 29, 30 }, 5, ExpectedResult = new int[] { 28, 29, 30 })]
             public int[] delSeveralFirstElTest(int[] array, int a)
             {
-                ArrayList actual = new ArrayList(array);
-                actual.delSeveralFirstEl(a);
+            actual.AddArrayAtTheEnd(array);
+            actual.delSeveralFirstEl(a);
                 return actual.ReturnArray();
             }
 
@@ -240,13 +253,13 @@ namespace Tests
             [TestCase(new int[] { 23, 24, 25, 26, 27, 28, 29, 30 }, 4, 4, ExpectedResult = new int[] { 23, 24, 25, 26 })]
             public int[] delseveralElByIndexTest(int[] array, int a, int index)
             {
-                ArrayList actual = new ArrayList(array);
-                actual.delseveralElByIndex(a, index);
+            actual.AddArrayAtTheEnd(array);
+            actual.delseveralElByIndex(a, index);
                 return actual.ReturnArray();
             }
 
+        
 
-
-        }
+    }
 
     }

@@ -14,14 +14,23 @@ namespace DataStructureNew
                 set { array[a] = value; }
             }
 
-            //public ArrayList()
-            //{
-            //    array = new int[0];
-            //    length = 0;
+        //public ArrayList()
+        //{
+        //    array = new int[0];
+        //    length = 0;
 
-            //}
+        //}
 
-            public int[] ReturnArray()
+        //public void AddMass(int[] array)
+        //{
+        //    int[] Array = new int[length ];
+        //    for (int i = 0; i < array.Length; i++)
+        //    {
+        //        Array[i] = array[i];
+        //    }
+        //}
+
+        public int[] ReturnArray()
             {
                 int[] arrayToReturn = new int[length];
                 for (int i = 0; i < length; i++)
@@ -257,7 +266,7 @@ namespace DataStructureNew
                 return min;
             }
 
-            // 15 поиск макс индекс
+            // 15 поиск мin индекс
             public int MinIndex()
             {
                 int[] newArray = array;
@@ -275,9 +284,10 @@ namespace DataStructureNew
                 return minIndex;
             }
 
-            // 14 поиск мин индекс
-            public int MaxIndex(int[] a)
+            // 14 поиск мax индекс
+            public int MaxIndex()
             {
+            int[] a = array;
                 int max = a[0];
                 int maxIndex = 0;
 
@@ -294,9 +304,10 @@ namespace DataStructureNew
 
 
             //16 сортировка по возрастанию
-            public void SorRise(int[] a)
+            public void SortRise()
             {
-                int q;
+            int[] a = array;
+            int q;
                 for (int i = 0; i < a.Length; i++)
                 {
                     for (int j = 0; j < a.Length - 1; j++)
@@ -332,7 +343,7 @@ namespace DataStructureNew
             }
 
             //18 удаление по значению
-            public void delByValue(int a) //удаление по индексу
+            public void delByValue(int a) 
             {
                 int k = 0;
 
@@ -362,7 +373,7 @@ namespace DataStructureNew
             }
 
             //19 вернуть длину
-            public int ReturnLenrth(int[] a)
+            public int ReturnLenrth()
             {
 
                 return length;
