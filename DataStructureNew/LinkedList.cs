@@ -28,7 +28,7 @@ namespace DataStructureNew
             for (int i = 0; i < array.Length - 1; i++)
             {
 
-                AddAtTheEnd(a[i]);
+                AddAtTheBeggining(a[i]);
 
 
             }
@@ -207,18 +207,18 @@ namespace DataStructureNew
         }
 
         //11 реверс
-        public void Reverse() //????
+        public void Reverse() 
         {
-            //Node tmpRoot = root;
-            //Node tmp;
-            
-            //while (tmpRoot.Next != null)
-            //{
-            //    root = tmpRoot.Next;
-                
-            //    tmpRoot.Next = tmpRoot.Next.Next;
+            Node tmpRoot = root; //не меняется 
+            Node tmp;
 
-            //}
+            while (tmpRoot.Next != null)
+            {
+                tmp = tmpRoot.Next;
+                tmpRoot.Next = tmpRoot.Next.Next;
+                tmp.Next=root;
+                root=tmp;
+            }
 
         }
 
@@ -323,28 +323,25 @@ namespace DataStructureNew
         public void delByValue(int a) //не работает???????????
         {
             Node tmp = root;
-            int k = 0;
-            while (tmp.Next != null)
+
+
+            if (root.Value ==a)
             {
-                if (tmp.Value ==a)
+                while (tmp.Next.Value ==a)
                 {
-                    k = k + 1;
+                    tmp = tmp.Next;
+                    Lenght--;
                 }
-                tmp = tmp.Next;
+                root = tmp.Next;
+                Lenght--;
             }
 
-
-            while (root.Value ==a)  //находим рут (работает)
+            while (tmp.Next != null)  
             {
-                tmp = root.Next;
-                root = root.Next;
-            }
-
-                while (tmp.Next!=null )
-            {
-                if (tmp.Next.Value == a)
+                if (tmp.Next.Value ==a)
                 {
-                    tmp = tmp.Next.Next;
+                    tmp.Next = tmp.Next.Next;
+                    Lenght--;
                 }
 
                 else
@@ -353,7 +350,7 @@ namespace DataStructureNew
                 }
             }
 
-            Lenght=Lenght -k;
+           
         }
 
         public int ReturnLenrth()

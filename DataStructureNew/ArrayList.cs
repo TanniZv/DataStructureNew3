@@ -95,7 +95,7 @@ namespace DataStructureNew
                     UpArraySize();
                 }
 
-                for (int i = length + 1; i > 0; i--)
+                for (int i = length ; i > 0; i--)
                 {
                     array[i] = array[i - 1];
                 }
@@ -115,7 +115,7 @@ namespace DataStructureNew
                     UpArraySize();
                 }
 
-                for (int i = length + 1; i > index; i--)
+                for (int i = length ; i > index; i--)
                 {
                     array[i] = array[i - 1];
                 }
