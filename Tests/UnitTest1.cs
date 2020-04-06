@@ -6,6 +6,7 @@ namespace Tests
 {
     [TestFixture (1)]
     [TestFixture (2)]
+    [TestFixture(3)]
 
     public class ListTest
     {
@@ -29,6 +30,11 @@ namespace Tests
                 case 2:
                     actual = new LinkedList();
                     break;
+
+                case 3:
+                    actual = new L2List();
+                    break;
+
             }
         }
 
@@ -42,7 +48,9 @@ namespace Tests
             }
 
             [TestCase(new int[] { 1, 2, 3 }, 7, ExpectedResult = new int[] { 1, 2, 3, 7 })]
-            public int[] AddAtTheEndTest(int[] array, int a)
+        [TestCase(new int[] { 1}, 7, ExpectedResult = new int[] { 1,  7 })]
+        [TestCase(new int[] {  }, 7, ExpectedResult = new int[] {  7 })]
+        public int[] AddAtTheEndTest(int[] array, int a)
             {
                 actual.AddArrayAtTheEnd(array);
                 actual.AddAtTheEnd(a);
@@ -70,7 +78,8 @@ namespace Tests
             }
 
             [TestCase(new int[] { 1, 2, 3 }, ExpectedResult = new int[] { 1, 2 })]
-            public int[] DelTheLastElTest(int[] array)
+        [TestCase(new int[] { 1 }, ExpectedResult = new int[] {  })]
+        public int[] DelTheLastElTest(int[] array)
         {
             actual.AddArrayAtTheEnd(array);
             actual.DelTheLastEl();
@@ -97,8 +106,11 @@ namespace Tests
             }
 
             [TestCase(new int[] { 1, 2, 3, 4, 73, 23 }, 4, ExpectedResult = 73)]
-            [TestCase(new int[] { 1, 2, 3, 74, 73, 23 }, 5, ExpectedResult = 23)]
-            public int ValueByIndexTest(int[] array, int index)
+        [TestCase(new int[] { 1, 2, 3, 4, 73, 23,1,2,3,100}, 7, ExpectedResult = 2)]
+        [TestCase(new int[] { 1, 2, 3, 74, 73, 23 }, 5, ExpectedResult = 23)]
+        [TestCase(new int[] { 1, 2, 3, 74, 73, 23 }, 3, ExpectedResult = 74)]
+        [TestCase(new int[] { 1, 2, 3, 74, 73, 23 }, 0, ExpectedResult = 1)]
+        public int ValueByIndexTest(int[] array, int index)
             {
             actual.AddArrayAtTheEnd(array);
             actual.ValueByIndex(index);
@@ -115,16 +127,19 @@ namespace Tests
             }
 
 
-            //[TestCase(new int[] { 1, 2, 3 }, 0, 9, ExpectedResult = new int[] { 9, 2, 3 })]
-            //public int[] ChangeByIndexTest(int[] array, int index, int a)
-            //{
-            //actual.AddArrayAtTheEnd(array);
-            //actual[index] = a;
-            //    return actual.ReturnArray();
-            //}
+        [TestCase(new int[] { 1, 2, 3 }, 0, 9, ExpectedResult = new int[] { 9, 2, 3 })]
+        [TestCase(new int[] { 1, 2, 3,4 }, 2, 9, ExpectedResult = new int[] { 1, 2, 9,4 })]
+        [TestCase(new int[] { 1, 2, 3, 4 }, 3, 9, ExpectedResult = new int[] { 1, 2, 3,9 })]
+        [TestCase(new int[] { 1, 2, 3, 4,5,6 }, 4, 9, ExpectedResult = new int[] { 1, 2, 3,4, 9,6 })]
+        public int[] ChangeByIndexTest(int[] array, int index, int a)
+        {
+            actual.AddArrayAtTheEnd(array);
+            actual.ChangeByIndex (index,a);
+            return actual.ReturnArray();
+        }
 
-            [TestCase(new int[] { 1, 2, 3 }, ExpectedResult = new int[] { 3, 2, 1 })]
-            [TestCase(new int[] { 7, 6, 5, 4, 3 }, ExpectedResult = new int[] { 3, 4, 5, 6, 7 })]
+        [TestCase(new int[] { 1, 2, 3 }, ExpectedResult = new int[] { 3, 2, 1 })]
+            [TestCase(new int[] { 7, 6, 5, 4, 3 }, ExpectedResult = new int[] { 3,7,6,5,4 })]//3, 4, 5, 6, 7
             [TestCase(new int[] { 7 }, ExpectedResult = new int[] { 7 })]
             public int[] ReverseTest(int[] array)
             {
@@ -162,7 +177,11 @@ namespace Tests
             }
 
             [TestCase(new int[] { 1, 2, 3, 54, 73, 23 }, ExpectedResult = 0)]
-            [TestCase(new int[] { 7 }, ExpectedResult = 0)]
+        [TestCase(new int[] { 1, -200, 3, 54, -73, -23000 }, ExpectedResult = 5)]
+        [TestCase(new int[] { 1, -200, 3, 54, -73, 23 }, ExpectedResult = 1)]
+        [TestCase(new int[] { 10, 2, 3, 54, -73, 23 }, ExpectedResult = 4)]
+        [TestCase(new int[] { 1, 2, 3, 54, 73, -23,90,80,70 }, ExpectedResult = 5)]
+        [TestCase(new int[] { 7 }, ExpectedResult = 0)]
             public int MinIndexTest(int[] array)
             {
             actual.AddArrayAtTheEnd(array);
@@ -170,7 +189,7 @@ namespace Tests
                 return actual.MinIndex();
             }
 
-            [TestCase(new int[] { 1, 2, 3 }, ExpectedResult = new int[] { 1, 2, 3 })]
+            [TestCase(new int[] { 1, 2, 3,-1,-2 }, ExpectedResult = new int[] { -2,-1,1, 2, 3 })]
             [TestCase(new int[] { 7, 6, 5, 4, 3 }, ExpectedResult = new int[] { 3, 4, 5, 6, 7 })]
             [TestCase(new int[] { 7 }, ExpectedResult = new int[] { 7 })]
             public int[] SortRiseTest(int[] array)
@@ -223,7 +242,8 @@ namespace Tests
             [TestCase(new int[] { 1, 2, 3, 4, 5 }, 2, new int[] { 24, 25 }, ExpectedResult = new int[] { 1, 2, 24, 25, 3, 4, 5 })]
             [TestCase(new int[] { 1 }, 0, new int[] { 4, 5 }, ExpectedResult = new int[] { 4, 5, 1 })]
             [TestCase(new int[] { 23, 24, 25, 26, 27, 28, 29, 30 }, 5, new int[] { 4, 5 }, ExpectedResult = new int[] { 23, 24, 25, 26, 27, 4, 5, 28, 29, 30 })]
-            public int[] AddArrayByIndexTest(int[] array, int index, int[] a)
+        [TestCase(new int[] { 2,20,30,40,9,8,6,2 }, 6, new int[] { 4, 5 }, ExpectedResult = new int[] { 2, 20, 30, 40, 9, 8, 4,5,6, 2 })]
+        public int[] AddArrayByIndexTest(int[] array, int index, int[] a)
             {
             actual.AddArrayAtTheEnd(array);
             actual.AddArrayByIndex(a, index);

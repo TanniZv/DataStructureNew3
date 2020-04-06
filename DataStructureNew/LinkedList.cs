@@ -117,20 +117,37 @@ namespace DataStructureNew
         {
             Node tmp = root;
 
-            while (tmp.Next.Next != null)
+            if (Lenght != 1)
             {
-                tmp = tmp.Next;
+
+                while (tmp.Next.Next != null)
+                {
+                    tmp = tmp.Next;
+                }
+
+                tmp.Next = null;
+                Lenght--;
             }
 
-            tmp.Next = null;
-            Lenght--;
+            else
+            {
+                root = null;
+                Lenght--;
+            }
         }
 
         //5 удаление из начала
         public void delTheFirstEl()
         {
-            Node tmp = root;
-            root = tmp.Next;
+            if (Lenght != 1)
+            {
+                Node tmp = root;
+                root = tmp.Next;
+            }
+            else
+            {
+                root = null;
+            }
             Lenght--;
         }
 
@@ -195,15 +212,23 @@ namespace DataStructureNew
         public void ChangeByIndex(int index, int a)
         {
             Node tmp = root;
-            int i = 1;
 
-            while (i != index)
+            if (index != 0)
             {
-                tmp = tmp.Next;
-                i++;
+                int i = 1;
+
+                while (i != index)
+                {
+                    tmp = tmp.Next;
+                    i++;
+                }
+                tmp.Next.Value = a;
             }
 
-            tmp.Next.Value = a;
+            else
+            {
+                tmp.Value = a;
+            }
         }
 
         //11 реверс
@@ -320,7 +345,7 @@ namespace DataStructureNew
         }
 
         //18 удаление по значению
-        public void delByValue(int a) //не работает???????????
+        public void delByValue(int a) 
         {
             Node tmp = root;
 
