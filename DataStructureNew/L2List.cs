@@ -82,33 +82,51 @@ namespace DataStructureNew
             }
         }
 
-        public void AddAccordingToIndex(int index, int a)  //ne rabotaet
+        public void AddAccordingToIndex(int index, int a)  
         {
-            L2Node tmp = root;
-            L2Node q;
-
-            if (index != 0)
+            if ((index != 0) && (index != Lenght))
             {
-                for (int i = 0; i < index - 1; i++)
+                if (index <= Lenght / 2)
                 {
-                    tmp = tmp.Next;
+                    L2Node tmp = root;
+                    L2Node q;
+
+                    for (int i = 0; i < index - 1; i++)
+                    {
+                        tmp = tmp.Next;
+                    }
+
+                    q = tmp.Next;
+                    tmp.Next = new L2Node(a);
+                    tmp.Next.Next = q;
                 }
-                tmp.Next = new L2Node(a);
-                q = tmp.Next.Next;
-                q.Previous = tmp.Next;
-                //q.Previous.Previous = tmp;
+                else
+                {
+                    L2Node tmp = end;                     //эта часть не работает
+                    L2Node q;
+                    int i = Lenght -1;
 
+                   while (i!=index)
+                    {
+                        tmp = tmp.Previous ;
+                        i--;
+                    }
 
-                tmp.Next.Previous = tmp;
-                //tmp = tmp.Next;
-                //tmp.Next = q;
-                //q.Previous = tmp;
+                    q = tmp.Previous ;
+                    tmp.Previous  = new L2Node(a);
+                    tmp.Previous.Previous  = q;
+                }
                 Lenght++;
+            }
+
+            else if (index == 0)
+            {
+                AddAtTheBeggining(a);
             }
 
             else
             {
-                AddAtTheBeggining(a);
+                AddAtTheEnd(a);
             }
         }
 
@@ -270,21 +288,21 @@ namespace DataStructureNew
             }
         }
 
-        public void Reverse()   //?????????????????
+        public void Reverse()      //как работает??????????/
         {
-            L2Node tmp = root;
-            L2Node p, q;
-            int i = 1;
-            L2Node en = end.Previous;
+            L2Node tmp = root; 
+            L2Node q=null;
 
-            tmp = tmp.Next;
-            root = end;
-            root.Next = tmp.Previous;
-            end = en;
-
-            //while (i!=Lenght -2)
+            while (tmp != null)
             {
-
+                q = tmp.Previous ;
+                tmp.Previous  = tmp.Next ;
+                tmp.Next = q;
+                tmp = tmp.Previous;
+            }
+            if (q != null)
+            {
+                root = q.Previous ;    //если 1 нода
             }
         }
 
@@ -569,13 +587,65 @@ namespace DataStructureNew
                 i++;
             }
             tmp.Next = null;
-           end = tmp;
+            end = tmp;
             Lenght = Lenght - a;
         }
 
         public void delSeveralFirstEl(int a)
-        { }
+        {
+            L2Node tmp = root;
+            int i = 1;
+            while (i != a + 1)
+            {
+                tmp = tmp.Next ;
+                i++;
+            }
+            tmp.Previous  = null;
+            root = tmp;
+            Lenght = Lenght - a;
+        }
+
+
         public void delseveralElByIndex(int a, int delIndex)
-        { }
+        {
+            if (delIndex == 0)
+            {
+                delSeveralFirstEl(a);
+            }
+
+            else if (delIndex == Lenght - 1)
+            {
+                DelSeveralLastEl(a);
+            }
+
+            else
+            {
+                L2Node tmp = root;
+                int j = 0;
+
+                for (int i = 0; i < delIndex - 1; i++)
+                {
+                    tmp = tmp.Next;
+                }
+
+                while (j != a)
+                {
+                    if (tmp.Next == null)
+                    {
+                        end = tmp;
+
+                    }
+
+                    tmp.Next = tmp.Next.Next;     //как сделать чтобы правильно проходил тест если удаляются элементы до конца
+                    tmp.Next.Previous = tmp;
+                    Lenght--;
+                    j++;
+                }
+
+            }
+
+        }
+           
     }
 }
+

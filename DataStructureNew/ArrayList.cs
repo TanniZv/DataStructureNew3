@@ -321,7 +321,22 @@ namespace DataStructureNew
                     }
                 }
 
-            }
+            //int q = 0;
+
+            //for (int i = 0; i < a.Length; i++)
+            //{
+            //    for (int j = 0; j < a.Length - 1; j++)
+            //    {
+            //        if (a[j] > a[j + 1])
+            //        {
+            //            q = a[j];
+            //            a[j] = a[j + 1];
+            //            a[j + 1] = q;
+            //        }
+            //    }
+            //}
+            //return a;
+        }
 
             //17 сортировка по убыванию
             public void SortFall(int[] a)

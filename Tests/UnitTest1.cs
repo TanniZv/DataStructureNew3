@@ -68,8 +68,9 @@ namespace Tests
             }
 
             [TestCase(new int[] { 1, 2, 3 }, 0, 9, ExpectedResult = new int[] { 9, 1, 2, 3 })]
-            [TestCase(new int[] { 1, 2, 3, 4, 5 }, 3, 9, ExpectedResult = new int[] { 1, 2, 3, 9, 4, 5 })]
-            [TestCase(new int[] { 1, 2, 3, 4, 5 }, 5, 9, ExpectedResult = new int[] { 1, 2, 3, 4, 5,9 })]
+            [TestCase(new int[] { 1, 2, 3, 4, 5,7,8,9 }, 3, 9, ExpectedResult = new int[] { 1, 2, 3, 9, 4, 5,7,8,9 })]
+        [TestCase(new int[] { 1, 2, 3, 4, 5,6,7,8,9}, 7, 90, ExpectedResult = new int[] { 1, 2, 3, 4, 5, 6, 7, 90,8, 9, })]
+        [TestCase(new int[] { 1, 2, 3, 4, 5 }, 5, 9, ExpectedResult = new int[] { 1, 2, 3, 4, 5,9 })]
             public int[] AddAccordingToIndexTest(int[] array, int index, int a)
             {
             actual.AddArrayAtTheEnd(array);
@@ -138,8 +139,8 @@ namespace Tests
             return actual.ReturnArray();
         }
 
-        [TestCase(new int[] { 1, 2, 3 }, ExpectedResult = new int[] { 3, 2, 1 })]
-            [TestCase(new int[] { 7, 6, 5, 4, 3 }, ExpectedResult = new int[] { 3,7,6,5,4 })]//3, 4, 5, 6, 7
+        [TestCase(new int[] { 1, 2,4, 3 }, ExpectedResult = new int[] { 3,4, 2, 1 })]
+            [TestCase(new int[] { 7, 6, 5, 4, 3 }, ExpectedResult = new int[] { 3, 4, 5, 6, 7 })]//3, 4, 5, 6, 7
             [TestCase(new int[] { 7 }, ExpectedResult = new int[] { 7 })]
             public int[] ReverseTest(int[] array)
             {
@@ -269,7 +270,8 @@ namespace Tests
             }
 
             [TestCase(new int[] { 1, 2, 3, 8, 9, 0, 90 }, 2, 3, ExpectedResult = new int[] { 1, 2, 3, 0, 90 })]
-            [TestCase(new int[] { 43, 45, 46, 789, 34, 23, 56, 345, 289, 976, 3, 5 }, 3, 4, ExpectedResult = new int[] { 43, 45, 46, 789, 345, 289, 976, 3, 5 })]
+        [TestCase(new int[] { 1, 2, 3, 8, 9, 0, 90 }, 2, 0, ExpectedResult = new int[] { 3, 8, 9, 0, 90 })]
+        [TestCase(new int[] { 43, 45, 46, 789, 34, 23, 56, 345, 289, 976, 3, 5 }, 3, 4, ExpectedResult = new int[] { 43, 45, 46, 789, 345, 289, 976, 3, 5 })]
             [TestCase(new int[] { 23, 24, 25, 26, 27, 28, 29, 30 }, 4, 4, ExpectedResult = new int[] { 23, 24, 25, 26 })]
             public int[] delseveralElByIndexTest(int[] array, int a, int index)
             {

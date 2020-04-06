@@ -488,26 +488,26 @@ namespace DataStructureNew
 
             if (delIndex == 0)
             {
-                for (int i = 1; i <= a; i++)
-                {
-                    root = tmp.Next;
-                }
+
+                delSeveralFirstEl(a);
+                
             }
 
             else
             {
-                for (int i = 1; i <= a; i++)
+                for (int i = 0; i < delIndex - 1; i++)
                 {
-                    for (int j = 0; j < delIndex - 1; j++)
-                    {
-                        tmp = tmp.Next;
-                    }
+                    tmp = tmp.Next;
+                }
 
+                int j = 0;
+                while (j != a)
+                {
                     tmp.Next = tmp.Next.Next;
+                    j++;
+                    Lenght--;
                 }
             }
-
-            Lenght = Lenght - a ;
         }
 
     }
