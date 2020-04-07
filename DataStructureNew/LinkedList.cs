@@ -325,23 +325,63 @@ namespace DataStructureNew
 
         public void SortRise() //???????????????????
         {
+            Node prev = null;
+            Node minPrev = null;
+            Node min = root;
             Node tmp = root;
 
-            for (int i=1;i<=Lenght; i++)
+            while (tmp != null)
             {
-                for (int j=1;j<=Lenght;j++)
+                if (min.Value > tmp.Value)
                 {
-                    if (tmp.Next.Value  <tmp.Value )
-                    {
-                        tmp.Next = root;
-                    }
+                    min = tmp;
+                    minPrev = prev;
                 }
+                prev = tmp;
+                tmp = tmp.Next;
+            }
+            if (minPrev != null)
+            {
+                minPrev.Next = minPrev.Next.Next;
+
+                min.Next = root;
+
+                root = min;
+
+            }
+
+            Node plese = root;
+
+            for (int i = 1; i < Lenght ; i++)
+            {
+                prev = plese;
+                minPrev = plese;
+                min = plese.Next;
+                tmp = plese.Next;
+                while (tmp != null)
+
+                {
+                    if (min.Value > tmp.Value)
+                    {
+                        min = tmp;
+                        minPrev = prev;
+
+                    }
+                    prev = tmp;
+                    tmp = tmp.Next;
+                }
+
+                minPrev.Next = minPrev.Next.Next;
+                min.Next = plese.Next;
+                plese.Next = min;
+                plese = plese.Next;
+
             }
         }
 
         public void SortFall(int[] a)
         {
-
+            
         }
 
         //18 удаление по значению
@@ -368,14 +408,11 @@ namespace DataStructureNew
                     tmp.Next = tmp.Next.Next;
                     Lenght--;
                 }
-
                 else
                 {
                     tmp = tmp.Next;
                 }
             }
-
-           
         }
 
         public int ReturnLenrth()

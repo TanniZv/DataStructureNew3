@@ -99,6 +99,8 @@ namespace DataStructureNew
                     q = tmp.Next;
                     tmp.Next = new L2Node(a);
                     tmp.Next.Next = q;
+                    tmp.Next.Previous = tmp;
+                    q.Previous = tmp.Next;
                 }
                 else
                 {
@@ -115,6 +117,8 @@ namespace DataStructureNew
                     q = tmp.Previous ;
                     tmp.Previous  = new L2Node(a);
                     tmp.Previous.Previous  = q;
+                    q.Next = tmp.Previous;
+                    tmp.Previous.Next = tmp;
                 }
                 Lenght++;
             }
@@ -288,7 +292,7 @@ namespace DataStructureNew
             }
         }
 
-        public void Reverse()      //как работает??????????/
+        public void Reverse()      
         {
             L2Node tmp = root; 
             L2Node q=null;

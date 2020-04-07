@@ -1,12 +1,12 @@
 ﻿<Properties StartupConfiguration="{7A63C3DA-D9ED-4C6C-871F-A42689318482}|Default">
   <MonoDevelop.Ide.ItemProperties.DataStructureNew PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="DataStructureNew/L2List.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="DataStructureNew/LinkedList.cs">
     <Files>
       <File FileName="Tests/UnitTest1.cs" Line="71" Column="115" />
-      <File FileName="DataStructureNew/ArrayList.cs" Line="338" Column="24" />
+      <File FileName="DataStructureNew/ArrayList.cs" />
       <File FileName="DataStructureNew/Program.cs" />
-      <File FileName="DataStructureNew/LinkedList.cs" Line="492" Column="38" />
-      <File FileName="DataStructureNew/L2List.cs" Line="291" Column="61" />
+      <File FileName="DataStructureNew/LinkedList.cs" Line="324" Column="8" />
+      <File FileName="DataStructureNew/L2List.cs" Line="103" Column="43" />
       <File FileName="DataStructureNew/Node.cs" />
       <File FileName="DataStructureNew/L2Node.cs" />
     </Files>
@@ -15,7 +15,7 @@
         <State name="__root__">
           <Node name="DataStructureNew" expanded="True">
             <Node name="DataStructureNew" expanded="True">
-              <Node name="L2List.cs" selected="True" />
+              <Node name="LinkedList.cs" selected="True" />
             </Node>
             <Node name="Tests" expanded="True" />
           </Node>
