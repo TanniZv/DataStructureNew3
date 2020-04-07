@@ -343,15 +343,12 @@ namespace DataStructureNew
             if (minPrev != null)
             {
                 minPrev.Next = minPrev.Next.Next;
-
                 min.Next = root;
-
                 root = min;
 
             }
 
             Node plese = root;
-
             for (int i = 1; i < Lenght ; i++)
             {
                 prev = plese;

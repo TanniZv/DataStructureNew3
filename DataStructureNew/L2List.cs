@@ -619,7 +619,7 @@ namespace DataStructureNew
 
             else if (delIndex == Lenght - 1)
             {
-                DelSeveralLastEl(a);
+                DelSeveralLastEl(1);
             }
 
             else
@@ -634,16 +634,22 @@ namespace DataStructureNew
 
                 while (j != a)
                 {
-                    if (tmp.Next == null)
+                    if (tmp.Next.Next  == null)
                     {
                         end = tmp;
 
                     }
 
-                    tmp.Next = tmp.Next.Next;     //как сделать чтобы правильно проходил тест если удаляются элементы до конца
-                    tmp.Next.Previous = tmp;
-                    Lenght--;
+                    else
+                    {
+                        tmp.Next = tmp.Next.Next;     //как сделать чтобы правильно проходил тест если удаляются элементы до конца
+                        tmp.Next.Previous = tmp;
+                        Lenght--;
+                    }
+                    
                     j++;
+
+                    
                 }
 
             }

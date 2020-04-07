@@ -1,287 +1,658 @@
-using NUnit.Framework;
-using DataStructureNew;
-
-
-namespace Tests
+﻿using System;
+namespace DataStructureNew
 {
-    [TestFixture (1)]
-    [TestFixture (2)]
-    [TestFixture(3)]
-
-    public class ListTest
+    public class L2List : IList
     {
-        IList actual;
-        int q;
+        private L2Node root;
+        private L2Node end;
+        public int Lenght { get; private set; }
 
-        public ListTest (int _q)
+        public L2List()
         {
-            q = _q;
+            root = null;
+            end = null;
+            Lenght = 0;
         }
 
-        [SetUp]
-        public void ListSelect()
+        public L2List(int a)
         {
-            switch (q)
+            root = new L2Node(a);
+            end = root;
+            Lenght = 1;
+        }
+
+        public L2List(int[] a)
+        {
+            root = null;
+            Lenght = 0;
+            for (int i = 0; i < a.Length; i++)
             {
-                case 1:
-                    actual = new ArrayList();
-                    break;
-
-                case 2:
-                    actual = new LinkedList();
-                    break;
-
-                case 3:
-                    actual = new L2List();
-                    break;
-
+                AddAtTheEnd(a[i]);
             }
         }
 
-            [TestCase(new int[] { 1, 2, 3 }, 4, ExpectedResult = new int[] { 4, 1, 2, 3 })]
-            [TestCase(new int[] { }, 1, ExpectedResult = new int[] { 1 })]
-            public int[] AddAtTheBegginingTest(int[] array, int a)
-            {
-            actual.AddArrayAtTheEnd(array);
-            actual.AddAtTheBeggining(a);
-                return actual.ReturnArray();
-            }
-
-            [TestCase(new int[] { 1, 2, 3 }, 7, ExpectedResult = new int[] { 1, 2, 3, 7 })]
-        [TestCase(new int[] { 1}, 7, ExpectedResult = new int[] { 1,  7 })]
-        [TestCase(new int[] {  }, 7, ExpectedResult = new int[] {  7 })]
-        public int[] AddAtTheEndTest(int[] array, int a)
-            {
-                actual.AddArrayAtTheEnd(array);
-                actual.AddAtTheEnd(a);
-                return actual.ReturnArray();
-            }
-
-            [TestCase(new int[] { 1, 2, 3 }, new int[] { 4, 5 }, ExpectedResult = new int[] { 1, 2, 3, 4, 5 })]
-        [TestCase(new int[] {  }, new int[] { 4, 5 }, ExpectedResult = new int[] {  4, 5 })]
-        [TestCase(new int[] { 1,  }, new int[] { 4, 5 }, ExpectedResult = new int[] { 1, 4, 5 })]
-        public int[] AddArrayAtTheEndTest(int[] array, int[] a)
-            {
-            actual.AddArrayAtTheEnd(array);
-            actual.AddArrayAtTheEnd(a);
-                return actual.ReturnArray();
-            }
-
-            [TestCase(new int[] { 1, 2, 3 }, 0, 9, ExpectedResult = new int[] { 9, 1, 2, 3 })]
-            [TestCase(new int[] { 1, 2, 3, 4, 5,7,8,9 }, 3, 9, ExpectedResult = new int[] { 1, 2, 3, 9, 4, 5,7,8,9 })]
-        [TestCase(new int[] { 1, 2, 3, 4, 5,6,7,8,9}, 7, 90, ExpectedResult = new int[] { 1, 2, 3, 4, 5, 6, 7, 90,8, 9, })]
-        [TestCase(new int[] { 1, 2, 3, 4, 5 }, 5, 9, ExpectedResult = new int[] { 1, 2, 3, 4, 5,9 })]
-            public int[] AddAccordingToIndexTest(int[] array, int index, int a)
-            {
-            actual.AddArrayAtTheEnd(array);
-            actual.AddAccordingToIndex(index, a);
-                return actual.ReturnArray();
-            }
-
-            [TestCase(new int[] { 1, 2, 3 }, ExpectedResult = new int[] { 1, 2 })]
-        [TestCase(new int[] { 1 }, ExpectedResult = new int[] {  })]
-        public int[] DelTheLastElTest(int[] array)
+        public int[] ReturnArray()
         {
-            actual.AddArrayAtTheEnd(array);
-            actual.DelTheLastEl();
-                return actual.ReturnArray();
-            }
-
-            [TestCase(new int[] { 1, 2, 3 }, ExpectedResult = new int[] { 2, 3 })]
-            [TestCase(new int[] { 1 }, ExpectedResult = new int[] { })]
-            public int[] delTheFirstElTest(int[] array)
+            int[] array = new int[Lenght];
+            if (Lenght != 0)
             {
-            actual.AddArrayAtTheEnd(array);
-            actual.delTheFirstEl();
-                return actual.ReturnArray();
+                int i = 0;
+                L2Node tmp = root;
+                do
+                {
+                    array[i] = tmp.Value;
+                    i++;
+                    tmp = tmp.Next;
+                } while (tmp != null);
             }
-
-            [TestCase(new int[] { 1, 2, 3 }, 0, ExpectedResult = new int[] { 2, 3 })]
-            [TestCase(new int[] { 1, 2, 3, 54, 73, 23 }, 4, ExpectedResult = new int[] { 1, 2, 3, 54, 23 })]
-            [TestCase(new int[] { 1, 2, 3, 54 }, 3, ExpectedResult = new int[] { 1, 2, 3 })]
-        public int[] delByIndexTest(int[] array, int index)
-            {
-            actual.AddArrayAtTheEnd(array);
-            actual.delByIndex(index);
-                return actual.ReturnArray();
-            }
-
-            [TestCase(new int[] { 1, 2, 3, 4, 73, 23 }, 4, ExpectedResult = 73)]
-        [TestCase(new int[] { 1, 2, 3, 4, 73, 23,1,2,3,100}, 7, ExpectedResult = 2)]
-        [TestCase(new int[] { 1, 2, 3, 74, 73, 23 }, 5, ExpectedResult = 23)]
-        [TestCase(new int[] { 1, 2, 3, 74, 73, 23 }, 3, ExpectedResult = 74)]
-        [TestCase(new int[] { 1, 2, 3, 74, 73, 23 }, 0, ExpectedResult = 1)]
-        public int ValueByIndexTest(int[] array, int index)
-            {
-            actual.AddArrayAtTheEnd(array);
-            actual.ValueByIndex(index);
-                return actual.ValueByIndex(index);
-            }
-
-            [TestCase(new int[] { 1, 2, 3, 4, 73, 23 }, 4, ExpectedResult = 3)]
-            [TestCase(new int[] { 1, 2, 3, 74, 73, 23 }, 4, ExpectedResult = -1)]
-            public int IndexByValuexTest(int[] array, int a)
-            {
-            actual.AddArrayAtTheEnd(array);
-            actual.IndexByValue(a);
-                return actual.IndexByValue(a);
-            }
-
-
-        [TestCase(new int[] { 1, 2, 3 }, 0, 9, ExpectedResult = new int[] { 9, 2, 3 })]
-        [TestCase(new int[] { 1, 2, 3,4 }, 2, 9, ExpectedResult = new int[] { 1, 2, 9,4 })]
-        [TestCase(new int[] { 1, 2, 3, 4 }, 3, 9, ExpectedResult = new int[] { 1, 2, 3,9 })]
-        [TestCase(new int[] { 1, 2, 3, 4,5,6 }, 4, 9, ExpectedResult = new int[] { 1, 2, 3,4, 9,6 })]
-        public int[] ChangeByIndexTest(int[] array, int index, int a)
-        {
-            actual.AddArrayAtTheEnd(array);
-            actual.ChangeByIndex (index,a);
-            return actual.ReturnArray();
+            return array;
         }
 
-        [TestCase(new int[] { 1, 2,4, 3 }, ExpectedResult = new int[] { 3,4, 2, 1 })]
-            [TestCase(new int[] { 7, 6, 5, 4, 3 }, ExpectedResult = new int[] { 3, 4, 5, 6, 7 })]//3, 4, 5, 6, 7
-            [TestCase(new int[] { 7 }, ExpectedResult = new int[] { 7 })]
-            public int[] ReverseTest(int[] array)
+        public void AddAtTheEnd(int a)
+        {
+            if (Lenght == 0)
             {
-            actual.AddArrayAtTheEnd(array);
-            actual.Reverse();
-                return actual.ReturnArray();
+                root = new L2Node(a);
+                end = root;
+                Lenght = 1;
+            }
+            else
+            {
+                end.Next = new L2Node(a);
+                end.Next.Previous = end;
+                end = end.Next;
+                Lenght++;
+            }
+        }
+
+        public void AddAtTheBeggining(int a)
+        {
+            if (Lenght == 0)
+            {
+                root = new L2Node(a);
+                end = root;
+                Lenght = 1;
+            }
+            else
+            {
+                root.Previous = new L2Node(a);
+                root.Previous.Next = root;
+                root = root.Previous;
+                Lenght++;
+            }
+        }
+
+        public void AddAccordingToIndex(int index, int a)  
+        {
+            if ((index != 0) && (index != Lenght))
+            {
+                if (index <= Lenght / 2)
+                {
+                    L2Node tmp = root;
+                    L2Node q;
+
+                    for (int i = 0; i < index - 1; i++)
+                    {
+                        tmp = tmp.Next;
+                    }
+
+                    q = tmp.Next;
+                    tmp.Next = new L2Node(a);
+                    tmp.Next.Next = q;
+                    tmp.Next.Previous = tmp;
+                    q.Previous = tmp.Next;
+                }
+                else
+                {
+                    L2Node tmp = end;                     //эта часть не работает
+                    L2Node q;
+                    int i = Lenght -1;
+
+                   while (i!=index)
+                    {
+                        tmp = tmp.Previous ;
+                        i--;
+                    }
+
+                    q = tmp.Previous ;
+                    tmp.Previous  = new L2Node(a);
+                    tmp.Previous.Previous  = q;
+                    q.Next = tmp.Previous;
+                    tmp.Previous.Next = tmp;
+                }
+                Lenght++;
             }
 
-            [TestCase(new int[] { 1, 2, 3, 54, 73, 23 }, ExpectedResult = 73)]
-            [TestCase(new int[] { 7 }, ExpectedResult = 7)]
-            public int MaxElementTest(int []array)
+            else if (index == 0)
             {
-            actual.AddArrayAtTheEnd(array);
-            actual.MaxElement();
-                return actual.MaxElement();
+                AddAtTheBeggining(a);
             }
 
-            [TestCase(new int[] { 1, 2, 3, 54, 73, 23 }, ExpectedResult = 1)]
-            [TestCase(new int[] { 1, 2, 3, -54, 73, 23 }, ExpectedResult = -54)]
-            [TestCase(new int[] { 7 }, ExpectedResult = 7)]
-            public int MinElementTest(int[] array)
+            else
             {
-            actual.AddArrayAtTheEnd(array);
-            actual.MinElement();
-                return actual.MinElement();
+                AddAtTheEnd(a);
+            }
+        }
+
+        public void DelTheLastEl()
+        {
+            if (Lenght != 1)
+            {
+                end = end.Previous;
+                end.Next = null;
+                Lenght--;
             }
 
-            [TestCase(new int[] { 1, 2, 3, 54, 73, 23 }, ExpectedResult = 4)]
-            [TestCase(new int[] { 7 }, ExpectedResult = 0)]
-            public int MaxIndexTest(int[] array)
+            else
             {
-            actual.AddArrayAtTheEnd(array);
-            actual.MaxIndex();
-                return actual.MaxIndex();
+                root = null;
+                Lenght--;
+            }
+        }
+
+        public void delTheFirstEl()
+        {
+            if (Lenght != 1)
+            {
+                L2Node q;
+
+                q = root.Next;
+                root = null;
+                root = q;
+                Lenght--;
             }
 
-            [TestCase(new int[] { 1, 2, 3, 54, 73, 23 }, ExpectedResult = 0)]
-        [TestCase(new int[] { 1, -200, 3, 54, -73, -23000 }, ExpectedResult = 5)]
-        [TestCase(new int[] { 1, -200, 3, 54, -73, 23 }, ExpectedResult = 1)]
-        [TestCase(new int[] { 10, 2, 3, 54, -73, 23 }, ExpectedResult = 4)]
-        [TestCase(new int[] { 1, 2, 3, 54, 73, -23,90,80,70 }, ExpectedResult = 5)]
-        [TestCase(new int[] { 7 }, ExpectedResult = 0)]
-            public int MinIndexTest(int[] array)
+            else
             {
-            actual.AddArrayAtTheEnd(array);
-            actual.MinIndex();
-                return actual.MinIndex();
+                root = null;
+                Lenght--;
+            }
+        }
+
+        public void delByIndex(int delIndex)
+        {
+
+            if ((delIndex != 0) && (delIndex != Lenght - 1))
+            {
+                L2Node tmp = root;
+                for (int i = 0; i < delIndex - 1; i++)
+                {
+                    tmp = tmp.Next;
+                }
+
+                tmp.Next = tmp.Next.Next;
+                tmp.Next.Previous = tmp;
+                Lenght--;
             }
 
-            [TestCase(new int[] { 1, 2, 3,-1,-2 }, ExpectedResult = new int[] { -2,-1,1, 2, 3 })]
-            [TestCase(new int[] { 7, 6, 5, 4, 3 }, ExpectedResult = new int[] { 3, 4, 5, 6, 7 })]
-            [TestCase(new int[] { 7 }, ExpectedResult = new int[] { 7 })]
-            public int[] SortRiseTest(int[] array)
+            else if (delIndex == Lenght - 1)
             {
-            actual.AddArrayAtTheEnd(array);
-            actual.SortRise();
-                return actual.ReturnArray();
+                DelTheLastEl();
             }
 
-            [TestCase(new int[] { 1, 2, 3 }, ExpectedResult = new int[] { 3, 2, 1 })]
-            [TestCase(new int[] { 7, 6, 1, 4, 3 }, ExpectedResult = new int[] { 7, 6, 4, 3, 1 })]
-            [TestCase(new int[] { 7 }, ExpectedResult = new int[] { 7 })]
-            public int[] SortFall(int[] array)
+            else
             {
-            actual.AddArrayAtTheEnd(array);
-            actual.SortFall(array);
-                return actual.ReturnArray();
+                delTheFirstEl();
+            }
+        }
+
+
+        public int ValueByIndex(int index)
+        {
+            int value;
+
+            if (index <= Lenght / 2)
+            {
+                L2Node tmp = root;
+                for (int i = 0; i < index; i++)
+                {
+                    tmp = tmp.Next;
+
+                }
+                value = tmp.Value;
             }
 
-            [TestCase(new int[] { 1, 2, 3 }, 2, ExpectedResult = new int[] { 1, 3 })]
-            [TestCase(new int[] { 1,1,1, 2, 3 }, 1, ExpectedResult = new int[] { 2, 3 })]
-            [TestCase(new int[] { 1, 3, 6, 2, 8 }, 8, ExpectedResult = new int[] { 1, 3, 6, 2 })]
-            [TestCase(new int[] { 1, 2,2, 3, 6, 2, 8, 76, 95, 90, 2 }, 2, ExpectedResult = new int[] { 1, 3, 6, 8, 76, 95, 90 })]
-            public int[] delByValueTest(int[] array, int a)
+            else
             {
-            actual.AddArrayAtTheEnd(array);
-            actual.delByValue(a);
-                return actual.ReturnArray();
+                L2Node tmp = end;
+                int i = Lenght - 1;
+                while (i != index)
+                {
+                    tmp = tmp.Previous;
+                    i--;
+                }
+                value = tmp.Value;
+
             }
 
-            [TestCase(new int[] { 1, 2, 3, 54, 73, 23 }, ExpectedResult = 6)]
-            [TestCase(new int[] { 7 }, ExpectedResult = 1)]
-            public int ReturnLenrthTest(int[] array)
+            return value;
+        }
+
+
+        public int IndexByValue(int a)
+        {
+            L2Node tmp = root;
+            int Index = -1; //если нет элемента равного а вернет 0
+
+            for (int i = 0; i < Lenght - 1; i++)
             {
-            actual.AddArrayAtTheEnd(array);
-            actual.ReturnLenrth();
-                return actual.ReturnLenrth();
+                if (tmp.Value == a)
+                {
+                    Index = i;
+                }
+
+                tmp = tmp.Next;
+            }
+            return Index;
+        }
+
+
+        public void ChangeByIndex(int index, int a)
+        {
+            if (index <= Lenght / 2)
+            {
+                L2Node tmp = root;
+                if (index != 0)
+                {
+                    int i = 1;
+
+                    while (i != index)
+                    {
+                        tmp = tmp.Next;
+                        i++;
+                    }
+                    tmp.Next.Value = a;
+                }
+
+                else
+                {
+                    tmp.Value = a;
+                }
             }
 
-            [TestCase(new int[] { 1, 2, 3 }, new int[] { 4, 5 }, ExpectedResult = new int[] { 4, 5, 1, 2, 3 })]
-            [TestCase(new int[] { 1 }, new int[] { 4, 5 }, ExpectedResult = new int[] { 4, 5, 1 })]
-            [TestCase(new int[] { }, new int[] { 4, 5 }, ExpectedResult = new int[] { 4, 5 })]
-            public int[] AddArrayAtTheBegginingTest(int[] array, int[] a)
+            else
             {
-            actual.AddArrayAtTheEnd(array);
-            actual.AddArrayAtTheBeggining(a);
-                return actual.ReturnArray();
+                L2Node tmp = end;
+                if (index != Lenght - 1)
+                {
+                    int i = Lenght - 2;
+
+                    while (i != index)
+                    {
+                        tmp = tmp.Previous;
+                        i--;
+                    }
+                    tmp.Previous.Value = a;
+                }
+
+                else
+                {
+                    tmp.Value = a;
+                }
+            }
+        }
+
+        public void Reverse()      
+        {
+            L2Node tmp = root; 
+            L2Node q=null;
+
+            while (tmp != null)
+            {
+                q = tmp.Previous ;
+                tmp.Previous  = tmp.Next ;
+                tmp.Next = q;
+                tmp = tmp.Previous;
+            }
+            if (q != null)
+            {
+                root = q.Previous ;    //если 1 нода
+            }
+        }
+
+
+        public int MaxElement()
+        {
+            L2Node tmp = root;
+            int max = tmp.Value;
+
+            for (int i = 1; i <= Lenght; i++)
+            {
+                if (max < tmp.Value)
+                {
+                    max = tmp.Value;
+                }
+                tmp = tmp.Next;
             }
 
-            [TestCase(new int[] { 1, 2, 3, 4, 5 }, 2, new int[] { 24, 25 }, ExpectedResult = new int[] { 1, 2, 24, 25, 3, 4, 5 })]
-            [TestCase(new int[] { 1 }, 0, new int[] { 4, 5 }, ExpectedResult = new int[] { 4, 5, 1 })]
-            [TestCase(new int[] { 23, 24, 25, 26, 27, 28, 29, 30 }, 5, new int[] { 4, 5 }, ExpectedResult = new int[] { 23, 24, 25, 26, 27, 4, 5, 28, 29, 30 })]
-        [TestCase(new int[] { 2,20,30,40,9,8,6,2 }, 6, new int[] { 4, 5 }, ExpectedResult = new int[] { 2, 20, 30, 40, 9, 8, 4,5,6, 2 })]
-        public int[] AddArrayByIndexTest(int[] array, int index, int[] a)
+            return max;
+        }
+
+
+        public int MinElement()
+        {
+            L2Node tmp = root;
+            int min = tmp.Value;
+
+            for (int i = 1; i <= Lenght; i++)
             {
-            actual.AddArrayAtTheEnd(array);
-            actual.AddArrayByIndex(a, index);
-                return actual.ReturnArray();
+                if (min > tmp.Value)
+                {
+                    min = tmp.Value;
+                }
+                tmp = tmp.Next;
             }
 
-            [TestCase(new int[] { 1, 2, 3 }, 2, ExpectedResult = new int[] { 1 })]
-            [TestCase(new int[] { 23, 24, 25, 26, 27, 28, 29, 30 }, 5, ExpectedResult = new int[] { 23, 24, 25 })]
-            public int[] DelSeveralLastElTest(int[] array, int a)
+            return min;
+        }
+
+
+        public int MinIndex()
+        {
+            L2Node tmp1 = root;
+            int min1 = tmp1.Value;
+            int Index1 = 0;
+
+            L2Node tmp = end;
+            int min2 = tmp.Value;
+            int Index2 = Lenght - 1;
+
+            for (int j = 0; j <= Lenght / 2; j++)
             {
-            actual.AddArrayAtTheEnd(array);
-            actual.DelSeveralLastEl(a);
-                return actual.ReturnArray();
+                if (min1 > tmp1.Value)
+                {
+                    min1 = tmp1.Value;
+                    Index1 = j;
+                }
+                tmp1 = tmp1.Next;
             }
 
-            [TestCase(new int[] { 1, 2, 3 }, 2, ExpectedResult = new int[] { 3 })]
-            [TestCase(new int[] { 23, 24, 25, 26, 27, 28, 29, 30 }, 5, ExpectedResult = new int[] { 28, 29, 30 })]
-            public int[] delSeveralFirstElTest(int[] array, int a)
+            for (int j = Lenght - 1; j < Lenght / 2; j--)
             {
-            actual.AddArrayAtTheEnd(array);
-            actual.delSeveralFirstEl(a);
-                return actual.ReturnArray();
+                if (min2 > tmp.Value)
+                {
+                    min2 = tmp.Value;
+                    Index2 = j;
+                }
+                tmp = tmp.Previous;
             }
 
-            [TestCase(new int[] { 1, 2, 3, 8, 9, 0, 90 }, 2, 3, ExpectedResult = new int[] { 1, 2, 3, 0, 90 })]
-        [TestCase(new int[] { 1, 2, 3, 8, 9, 0, 90 }, 2, 0, ExpectedResult = new int[] { 3, 8, 9, 0, 90 })]
-        [TestCase(new int[] { 43, 45, 46, 789, 34, 23, 56, 345, 289, 976, 3, 5 }, 3, 4, ExpectedResult = new int[] { 43, 45, 46, 789, 345, 289, 976, 3, 5 })]
-            [TestCase(new int[] { 23, 24, 25, 26, 27, 28, 29, 30 }, 4, 4, ExpectedResult = new int[] { 23, 24, 25, 26 })]
-            public int[] delseveralElByIndexTest(int[] array, int a, int index)
+            if (min1 < min2)
+            { return Index1; }
+            else { return Index2; }      //ne sravnivaetsya
+
+        }
+
+
+        public int MaxIndex()
+        {
+            L2Node tmp = root;
+            int max = tmp.Value;
+            int Index = 0;
+
+            for (int i = 0; i < Lenght - 1; i++)
             {
-            actual.AddArrayAtTheEnd(array);
-            actual.delseveralElByIndex(a, index);
-                return actual.ReturnArray();
+                if (max < tmp.Value)
+                {
+                    max = tmp.Value;
+                    Index = i;
+                }
+                tmp = tmp.Next;
             }
 
-        
+            return Index;
+        }
 
+        public void SortRise() //?????????????
+        {
+            
+        }
+
+        public void SortFall(int[] a)
+        { }
+
+
+        public void delByValue(int a)
+        {
+            L2Node tmp = root;
+
+            if (root.Value == a)
+            {
+                while (tmp.Next.Value == a)
+                {
+                    tmp = tmp.Next;
+                    Lenght--;
+                }
+                root = tmp.Next;
+                Lenght--;
+            }
+
+            while (tmp.Next != null)
+            {
+                if (tmp.Next.Value == a)
+                {
+                    tmp.Next = tmp.Next.Next;
+                    Lenght--;
+                }
+
+                else
+                {
+                    tmp = tmp.Next;
+                }
+            }
+
+        }
+
+        public int ReturnLenrth()
+        { return Lenght; }
+
+        public void AddArrayAtTheEnd(int[] a)
+        {
+            if (a.Length != 0)
+            {
+                if (Lenght == 0)
+                {
+                    root = new L2Node(a[0]);
+                    end = root;
+                    L2Node tmp = root;
+
+                    for (int i = 1; i < a.Length; i++)
+                    {
+                        tmp.Next = new L2Node(a[i]);
+                        tmp.Next.Previous = tmp;
+                        tmp = tmp.Next;
+                    }
+                    end = tmp;
+                    Lenght = a.Length;
+                }
+
+                else
+                {
+                    L2Node tmp = root;
+
+                    while (tmp.Next != null)
+                    {
+                        tmp = tmp.Next;
+                    }
+
+                    for (int i = 0; i < a.Length; i++)
+                    {
+                        tmp.Next = new L2Node(a[i]);
+                        tmp.Next.Previous = tmp;
+                        tmp = tmp.Next;
+                    }
+                    Lenght += a.Length;
+                }
+            }
+
+        }
+
+        public void AddArrayAtTheBeggining(int[] a)
+        {
+            L2Node tmp;
+            L2Node q = root;
+
+            if (Lenght == 0)
+            {
+                
+               //end = new L2Node(a[]);     нужно end присваивать?????????
+
+                for (int i = a.Length - 2; i >= 0; i--)
+                {
+                    root = new L2Node(a[i]);
+                    tmp = root;
+                    tmp.Next = q;
+                    q = root;
+                    
+                }
+                Lenght = a.Length;
+            }
+
+            else
+            {
+                for (int i = a.Length - 1; i >=0; i--)
+                {
+                    root.Previous = new L2Node(a[i]);
+                    root.Previous.Next = root;
+                    root = root.Previous;
+                    
+                }
+             Lenght = Lenght + a.Length;
+            }
+        }
+
+
+        public void AddArrayByIndex(int[] a, int index)
+        {
+            if (index == Lenght)
+            {
+                AddArrayAtTheEnd(a);
+            }
+
+            else if (index == 0)
+            {
+                AddArrayAtTheBeggining(a);
+            }
+
+            else
+            {
+                if (index <= Lenght / 2)
+                {
+                    L2Node tmp = root;
+                    L2Node q;
+                    for (int i = 0; i < index - 1; i++)
+                    {
+                        tmp = tmp.Next;
+                    }
+                    q = tmp.Next;
+
+                    for (int i = 0; i < a.Length; i++)
+                    {
+                        tmp.Next = new L2Node(a[i]);
+                        tmp = tmp.Next;
+                    }
+
+                    tmp.Next = q;
+                }
+
+                else
+                {
+
+                    L2Node tmp =end ;                //эта часть не работает
+                    L2Node q;
+                    int i = Lenght - 1;
+                    while (i != index)
+                    {
+                        tmp = tmp.Previous ;
+                        i--;
+                    }
+                    q = tmp.Previous ;
+
+                    for (int j=a.Length-1; j>=0 ; j--)
+                    {
+                        tmp.Previous  = new L2Node(a[i]);
+                        tmp = tmp.Previous ;
+                    }
+
+                    tmp.Previous = q;
+                }
+
+                Lenght = Lenght + a.Length;
+            }
+        }
+
+        public void DelSeveralLastEl(int a)
+        {
+            L2Node tmp = end;
+            int i = 1;
+            while (i!=a+1)
+            {
+                tmp = tmp.Previous;
+                i++;
+            }
+            tmp.Next = null;
+            end = tmp;
+            Lenght = Lenght - a;
+        }
+
+        public void delSeveralFirstEl(int a)
+        {
+            L2Node tmp = root;
+            int i = 1;
+            while (i != a + 1)
+            {
+                tmp = tmp.Next ;
+                i++;
+            }
+            tmp.Previous  = null;
+            root = tmp;
+            Lenght = Lenght - a;
+        }
+
+
+        public void delseveralElByIndex(int a, int delIndex)
+        {
+            if (delIndex == 0)
+            {
+                delSeveralFirstEl(a);
+            }
+
+            else if (delIndex == Lenght - 1)
+            {
+                DelSeveralLastEl(1);
+            }
+
+            else
+            {
+                L2Node tmp = root;
+                int j = 0;
+
+                for (int i = 0; i < delIndex - 1; i++)
+                {
+                    tmp = tmp.Next;
+                }
+
+                while (j != a)
+                {
+                    if (tmp.Next.Next == null)
+                    {
+                        end = tmp;
+
+                    }
+
+
+                    tmp.Next = tmp.Next.Next;     //как сделать чтобы правильно проходил тест если удаляются элементы до конца
+                    tmp.Next.Previous = tmp;
+                    Lenght--;
+                    j++;
+
+                    
+                }
+
+            }
+
+        }
+           
     }
+}
 
-    }
