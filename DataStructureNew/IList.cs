@@ -21,7 +21,7 @@ namespace DataStructureNew
             public int MinIndex();
             public int MaxIndex();
             public void SortRise();
-            public void SortFall(int[] a);
+            public void SortFall();
             public void delByValue(int a);
             public int ReturnLenrth();
             public void AddArrayAtTheEnd(int[] a);

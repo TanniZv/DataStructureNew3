@@ -207,7 +207,7 @@ namespace TestsLists
             public int[] SortFall(int[] array)
             {
                 actual.AddArrayAtTheEnd(array);
-                actual.SortFall(array);
+                actual.SortFall();
                 return actual.ReturnArray();
             }
 
@@ -243,6 +243,7 @@ namespace TestsLists
 
             [TestCase(new int[] { 1, 2, 3, 4, 5 }, 2, new int[] { 24, 25 }, ExpectedResult = new int[] { 1, 2, 24, 25, 3, 4, 5 })]
             [TestCase(new int[] { 1 }, 0, new int[] { 4, 5 }, ExpectedResult = new int[] { 4, 5, 1 })]
+            [TestCase(new int[] { 1 }, 1, new int[] { 4, 5 }, ExpectedResult = new int[] { 1,4, 5 })]
             [TestCase(new int[] { 23, 24, 25, 26, 27, 28, 29, 30 }, 5, new int[] { 4, 5 }, ExpectedResult = new int[] { 23, 24, 25, 26, 27, 4, 5, 28, 29, 30 })]
             [TestCase(new int[] { 2, 20, 30, 40, 9, 8, 6, 2 }, 6, new int[] { 4, 5 }, ExpectedResult = new int[] { 2, 20, 30, 40, 9, 8, 4, 5, 6, 2 })]
             public int[] AddArrayByIndexTest(int[] array, int index, int[] a)

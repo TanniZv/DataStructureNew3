@@ -376,9 +376,58 @@ namespace DataStructureNew
             }
         }
 
-        public void SortFall(int[] a)
+        public void SortFall()
         {
-            
+            Node prev = null;
+            Node maxPrev = null;
+            Node max = root;
+            Node tmp = root;
+
+            while (tmp != null)
+            {
+                if (max.Value < tmp.Value)
+                {
+                    max = tmp;
+                    maxPrev = prev;
+                }
+                prev = tmp;
+                tmp = tmp.Next;
+            }
+            if (maxPrev != null)
+            {
+                maxPrev.Next = maxPrev.Next.Next;
+                max.Next = root;
+                root = max;
+
+            }
+
+            Node plese = root;
+            for (int i = 1; i < Lenght; i++)
+            {
+                prev = plese;
+                maxPrev = plese;
+                max = plese.Next;
+                tmp = plese.Next;
+                while (tmp != null)
+
+                {
+                    if (max.Value < tmp.Value)
+                    {
+                        max = tmp;
+                        maxPrev = prev;
+
+                    }
+                    prev = tmp;
+                    tmp = tmp.Next;
+                }
+
+                maxPrev.Next = maxPrev.Next.Next;
+                max.Next = plese.Next;
+                plese.Next = max;
+                plese = plese.Next;
+
+            }
+
         }
 
         //18 удаление по значению

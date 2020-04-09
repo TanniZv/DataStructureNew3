@@ -367,7 +367,7 @@ namespace DataStructureNew
                 tmp1 = tmp1.Next;
             }
 
-            for (int j = Lenght - 1; j < Lenght / 2; j--)
+            for (int j = Lenght - 1; j > Lenght / 2; j--)
             {
                 if (min2 > tmp.Value)
                 {
@@ -379,7 +379,7 @@ namespace DataStructureNew
 
             if (min1 < min2)
             { return Index1; }
-            else { return Index2; }      //ne sravnivaetsya
+            else { return Index2; }      
 
         }
 
@@ -405,11 +405,109 @@ namespace DataStructureNew
 
         public void SortRise() //?????????????
         {
-            
+            L2Node prev = null;
+            L2Node minPrev = null;
+            L2Node min = root;
+            L2Node tmp = root;
+
+            while (tmp != null)
+            {
+                if (min.Value > tmp.Value)
+                {
+                    min = tmp;
+                    minPrev = prev;
+                }
+                prev = tmp;
+                tmp = tmp.Next;
+            }
+            if (minPrev != null)
+            {
+                minPrev.Next = minPrev.Next.Next;
+                min.Next = root;
+                root = min;
+
+            }
+
+            L2Node plese = root;
+            for (int i = 1; i < Lenght; i++)
+            {
+                prev = plese;
+                minPrev = plese;
+                min = plese.Next;
+                tmp = plese.Next;
+                while (tmp != null)
+
+                {
+                    if (min.Value > tmp.Value)
+                    {
+                        min = tmp;
+                        minPrev = prev;
+
+                    }
+                    prev = tmp;
+                    tmp = tmp.Next;
+                }
+
+                minPrev.Next = minPrev.Next.Next;
+                min.Next = plese.Next;
+                plese.Next = min;
+                plese = plese.Next;
+
+            }
         }
 
-        public void SortFall(int[] a)
-        { }
+        public void SortFall()
+        {
+            L2Node prev = null;
+            L2Node maxPrev = null;
+            L2Node max = root;
+            L2Node tmp = root;
+
+            while (tmp != null)
+            {
+                if (max.Value < tmp.Value)
+                {
+                    max = tmp;
+                    maxPrev = prev;
+                }
+                prev = tmp;
+                tmp = tmp.Next;
+            }
+            if (maxPrev != null)
+            {
+                maxPrev.Next = maxPrev.Next.Next;
+                max.Next = root;
+                root = max;
+
+            }
+
+            L2Node plese = root;
+            for (int i = 1; i < Lenght; i++)
+            {
+                prev = plese;
+                maxPrev = plese;
+                max = plese.Next;
+                tmp = plese.Next;
+                while (tmp != null)
+
+                {
+                    if (max.Value < tmp.Value)
+                    {
+                        max = tmp;
+                        maxPrev = prev;
+
+                    }
+                    prev = tmp;
+                    tmp = tmp.Next;
+                }
+
+                maxPrev.Next = maxPrev.Next.Next;
+                max.Next = plese.Next;
+                plese.Next = max;
+                plese = plese.Next;
+
+            }
+        }
 
 
         public void delByValue(int a)
@@ -476,10 +574,11 @@ namespace DataStructureNew
                     }
 
                     for (int i = 0; i < a.Length; i++)
-                    {
+                    { 
                         tmp.Next = new L2Node(a[i]);
                         tmp.Next.Previous = tmp;
                         tmp = tmp.Next;
+                        
                     }
                     Lenght += a.Length;
                 }
@@ -489,21 +588,19 @@ namespace DataStructureNew
 
         public void AddArrayAtTheBeggining(int[] a)
         {
-            L2Node tmp;
+            
             L2Node q = root;
 
             if (Lenght == 0)
             {
-                
-               //end = new L2Node(a[]);     нужно end присваивать?????????
+                root = new L2Node(a[a.Length -1]);
+               end = root;   
 
                 for (int i = a.Length - 2; i >= 0; i--)
                 {
-                    root = new L2Node(a[i]);
-                    tmp = root;
-                    tmp.Next = q;
-                    q = root;
-                    
+                    root.Previous = new L2Node(a[i]);
+                    root.Previous.Next = root;
+                    root = root.Previous;
                 }
                 Lenght = a.Length;
             }
@@ -647,9 +744,7 @@ namespace DataStructureNew
                         Lenght--;
                     }
                     
-                    j++;
-
-                    
+                    j++; 
                 }
 
             }
